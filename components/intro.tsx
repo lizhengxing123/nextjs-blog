@@ -1,23 +1,69 @@
-import { CMS_NAME } from '../lib/constants'
+/*
+ * @Descripttion:
+ * @Author: lizhengxing
+ * @Date: 2022-11-17 07:44:30
+ * @LastEditTime: 2022-11-17 19:20:52
+ */
 
-const Intro = () => {
+import Avatar from "./avatar";
+import CategoryCard from "./category-card";
+import { AUTHOR } from "../lib/constants";
+import PostCategory from "../interfaces/postCategory";
+import Link from "next/link";
+
+type Props = {
+  postCategories: PostCategory[];
+};
+
+const Intro = ({ postCategories }: Props) => {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
-        Blog.
-      </h1>
-      <h4 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A statically generated blog example using{' '}
-        <a
-          href="https://nextjs.org/"
-          className="underline hover:text-blue-600 duration-200 transition-colors"
+    <>
+      <div className="bg-black">
+        <div className="relative pb-32 bg-gray-200">
+          <div className="absolute inset-0">
+            <img
+              className="w-full h-full object-cover"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIQfjzs1hdVtNhKOKqmakeSPZnCuxTATj_ig&usqp=CAU"
+              alt=""
+            />
+            <div
+              className="absolute inset-0 bg-gray-800 mix-blend-multiply"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <div className="relative max-w-7xl mx-auto pt-12 pb-24 px-4 sm:pb-32 sm:px-6 lg:px-8">
+            <Avatar {...AUTHOR}></Avatar>
+          </div>
+        </div>
+        <section
+          className="-mt-32 max-w-7xl mx-auto relative z-10 pb-8 px-4 sm:px-6 lg:px-8"
+          aria-labelledby="contact-heading"
         >
-          Next.js
-        </a>{' '}
-        and {CMS_NAME}.
-      </h4>
-    </section>
-  )
-}
+          <div className="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8">
+            {postCategories && postCategories.length
+              ? postCategories.map((category) => (
+                  <CategoryCard {...category} key={category.name} />
+                ))
+              : ""}
+          </div>
+        </section>
+      </div>
+      <div className="bg-black">
+        <div className="max-w-7xl mx-auto text-center pt-4 pb-12 px-4 sm:px-6 lg:pb-16 lg:px-8">
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex rounded-md shadow">
+              <Link
+                href="/list"
+                className="inline-flex items-center justify-center px-4 sm:px-16 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-500"
+              >
+                文章列表
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default Intro
+export default Intro;

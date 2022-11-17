@@ -1,36 +1,32 @@
-import Avatar from './avatar'
-import DateFormatter from './date-formatter'
-import CoverImage from './cover-image'
-import PostTitle from './post-title'
-import type Author from '../interfaces/author'
+/*
+ * @Descripttion:
+ * @Author: lizhengxing
+ * @Date: 2022-11-17 07:44:30
+ * @LastEditTime: 2022-11-17 20:27:36
+ */
+import DateFormatter from "./date-formatter";
+import CoverImage from "./cover-image";
+import type Author from "../interfaces/author";
 
 type Props = {
-  title: string
-  coverImage: string
-  date: string
-  author: Author
-}
+  title: string;
+  coverImage: string;
+  date: string;
+  author: Author;
+};
 
 const PostHeader = ({ title, coverImage, date, author }: Props) => {
   return (
-    <>
-      <PostTitle>{title}</PostTitle>
-      <div className="hidden md:block md:mb-12">
-        <Avatar name={author.name} picture={author.picture} />
+    <div className="text-lg max-w-prose prose prose-dark mx-auto">
+      <h1 className="text-xl font-black max-w-prose mx-auto block tracking-wide uppercase text-white">
+        {title}
+      </h1>
+      <div className="mt-8 mb-6 text-xl text-gray-300 leading-8">
+        <DateFormatter dateString={date} />
       </div>
-      <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} src={coverImage} />
-      </div>
-      <div className="max-w-2xl mx-auto">
-        <div className="block md:hidden mb-6">
-          <Avatar name={author.name} picture={author.picture} />
-        </div>
-        <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} />
-        </div>
-      </div>
-    </>
-  )
-}
+      <CoverImage title={title} src={coverImage} />
+    </div>
+  );
+};
 
-export default PostHeader
+export default PostHeader;
