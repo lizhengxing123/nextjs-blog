@@ -1,24 +1,31 @@
-/*
- * @Descripttion:
- * @Author: lizhengxing
- * @Date: 2022-11-17 07:44:30
- * @LastEditTime: 2022-11-17 18:36:31
- */
-import markdownStyles from "./markdown-styles.module.css";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import styles from "./markdown-styles.module.css";
 
-type Props = {
-  content: string;
-};
-
-const PostBody = ({ content }: Props) => {
+export default function PostBody({ content }) {
   return (
-    <div className="text-lg max-w-prose mt-6 prose prose-dark prose-lg text-gray-300 mx-auto">
-      <div
-        className={markdownStyles["markdown"]}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-    </div>
+    <ReactMarkdown
+      className={`${styles.markdown} text-lg max-w-prose mt-6 prose prose-dark prose-lg text-gray-300 mx-auto`}
+      children={content}
+      components={{
+        code({ node, inline, className, children, ...props }) {
+          const match = /language-(\w+)/.exec(className || "");
+          return !inline && match ? (
+            <SyntaxHighlighter
+              children={String(children).replace(/\n$/, "")}
+              language={match[1]}
+              style={materialDark}
+              PreTag="div"
+              {...props}
+            />
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          );
+        },
+      }}
+    />
   );
-};
-
-export default PostBody;
+}

@@ -2,11 +2,10 @@
  * @Descripttion: 页面布局
  * @Author: lizhengxing
  * @Date: 2022-11-17 07:44:30
- * @LastEditTime: 2022-11-17 20:26:56
+ * @LastEditTime: 2022-11-18 20:35:55
  */
 import Footer from "./footer";
 import Meta from "./meta";
-
 type Props = {
   preview?: boolean;
   children: React.ReactNode;

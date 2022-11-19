@@ -2,12 +2,11 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 17:39:39
- * @LastEditTime: 2022-11-17 20:22:56
+ * @LastEditTime: 2022-11-18 20:26:33
  */
 
 import Link from "next/link";
 import Post from "../interfaces/post";
-import DateFormatter from "./date-formatter";
 
 type Props = {
   post: Post;
@@ -32,7 +31,8 @@ const PostCard = ({ post }: Props) => {
           >
             <p className="text-xl font-semibold text-gray-100">{post.title}</p>
             <p className="mt-3 text-base text-gray-500">
-              <DateFormatter dateString={post.date} />
+              {/* <DateFormatter dateString={post.date} /> */}
+              {post.date}
             </p>
           </Link>
         </div>

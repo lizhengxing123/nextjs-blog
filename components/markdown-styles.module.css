@@ -9,10 +9,48 @@
   @apply my-6;
 }
 
+.markdown h2,
+.markdown h3 {
+  @apply mt-10 mb-4 leading-normal text-gray-50;
+}
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-3xl;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-2xl;
+}
+
+.markdown a {
+  @apply text-gray-50 font-bold underline px-1 text-lg;
+}
+
+.markdown ul li {
+  @apply relative ml-8;
+}
+
+.markdown ul li::before {
+  content: "";
+  @apply absolute -left-8 top-2.5 w-2 h-2 rounded-full block mx-3 bg-gray-400;
+}
+
+.markdown code:not(.markdown pre div code) {
+  @apply text-gray-50 font-bold text-lg;
+}
+.markdown code::before {
+  content: "`";
+}
+.markdown code::after {
+  content: "`";
+}
+
+.markdown pre div {
+  @apply rounded-2xl;
+}
+
+.markdown pre div code::before {
+  content: "";
+}
+.markdown pre div code::after {
+  content: "";
 }

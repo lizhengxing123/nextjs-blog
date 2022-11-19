@@ -110,7 +110,7 @@ export async function getStaticProps({ params }: Params) {
     props: {
       post: {
         ...post,
-        content,
+        // content,
       },
     },
   };

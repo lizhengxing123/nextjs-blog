@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 07:44:30
- * @LastEditTime: 2022-11-17 20:27:36
+ * @LastEditTime: 2022-11-17 21:52:03
  */
 import DateFormatter from "./date-formatter";
 import CoverImage from "./cover-image";
@@ -22,7 +22,8 @@ const PostHeader = ({ title, coverImage, date, author }: Props) => {
         {title}
       </h1>
       <div className="mt-8 mb-6 text-xl text-gray-300 leading-8">
-        <DateFormatter dateString={date} />
+        {/* <DateFormatter dateString={date} /> */}
+        {date}
       </div>
       <CoverImage title={title} src={coverImage} />
     </div>
