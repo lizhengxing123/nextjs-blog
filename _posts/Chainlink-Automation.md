@@ -1,15 +1,20 @@
 ---
 title: 'Chainlink产品之Automation的使用'
 excerpt: '学习Chainlink Automation的使用'
-coverImage: '/assets/blog/chainlink/keeper-1.png'
+coverImage: '/assets/blog/chainlink/keeper-0.png'
 date: '2022-11-18 10:09:45'
 author:
   name: 李正星
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
-  url: '/assets/blog/chainlink/keeper-1.png'
+  url: '/assets/blog/chainlink/keeper-0.png'
 type: 'Chainlink'
 ---
+
+## 学习
+
+- [bilibili 视频](https://www.bilibili.com/video/BV1ed4y1N7Uv?p=9&vd_source=97e4871747b6e43793eaa0ddb1bb5191)
+- [官方文档](https://docs.chain.link/chainlink-automation/introduction/)
 
 #### 业务流程
 
