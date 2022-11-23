@@ -1,13 +1,13 @@
 ---
 title: 'React 高级概念'
 excerpt: '学习 React 高级概念使用'
-coverImage: '/assets/blog/react/react18-1.png'
+coverImage: '/assets/blog/react/advanced.png'
 date: '2022-11-22 21:33:14'
 author:
   name: 李正星
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
-  url: '/assets/blog/react/react18-1.png'
+  url: '/assets/blog/react/advanced.png'
 type: 'React'
 ---
 

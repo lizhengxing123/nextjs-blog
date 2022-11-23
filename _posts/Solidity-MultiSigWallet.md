@@ -1,13 +1,13 @@
 ---
 title: 'Solidity 实现多重签名钱包'
 excerpt: 'Solidity 实现多重签名钱包'
-coverImage: '/assets/blog/solidity/itmap.png'
+coverImage: '/assets/blog/solidity/multi-sig.png'
 date: '2022-11-22 23:01:03'
 author:
   name: 李正星
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
-  url: '/assets/blog/solidity/itmap.png'
+  url: '/assets/blog/solidity/multi-sig.png'
 type: 'Solidity'
 ---
 
