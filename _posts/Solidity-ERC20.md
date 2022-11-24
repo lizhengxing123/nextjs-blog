@@ -45,6 +45,8 @@ interface IERC20 {
 
 ### ERC20 OpenZeppelin 实现
 
+[官方地址](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
+
 将通用的 `transfer` 和 `approval` 写成单独的方法，以供调用
 
 ```solidity

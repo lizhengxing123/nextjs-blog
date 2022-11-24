@@ -1,13 +1,13 @@
 ---
 title: '在 React 中使用 Jest 测试'
 excerpt: '学习 Jest 测试'
-coverImage: '/assets/blog/react/advanced.png'
-date: '2022-11-24 21:33:14'
+coverImage: '/assets/blog/react/jest.png'
+date: '2022-11-24 11:32:19'
 author:
   name: 李正星
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
-  url: '/assets/blog/react/advanced.png'
+  url: '/assets/blog/react/jest.png'
 type: 'React'
 ---
 
@@ -156,7 +156,7 @@ it("渲染用户数据", () => {
     }
     // 模拟 fetch
     jest.spyOn(global, 'fetch').mockImplementation(() => {
-        Promise.resolve({
+        return Promise.resolve({
             json: () => Promise.resolve(fakeUser)
         })
     })
@@ -174,4 +174,370 @@ it("渲染用户数据", () => {
     // 将模拟 fetch 恢复为原始值
     global.fetch.mockRestore()
 })
+```
+
+### mock 模块
+
+有些模块可能在测试环境中不能很好的工作，或者对测试本身不是很重要，使用虚拟数据来 mock 这些模块可以让测试编写更容易。
+
+```js
+// 组件 - map.js
+import React from "react";
+import { LoadScript, GoogleMap } from "react-google-maps";
+
+export default function Map(props) {
+  return (
+    <LoadScript id="script-loader" googleMapsApiKey="YOUR_API_KEY">
+      <GoogleMap id="example-map" center={props.center} />
+    </LoadScript>
+  );
+}
+
+// 组件 - contact.js
+import React from "react";
+import Map from "./map";
+
+export default function Contact(props) {
+  return (
+    <div>
+      <address>
+        联系 {props.name}，通过{" "}
+        <a data-testid="email" href={"mailto:" + props.email}>
+          email
+        </a>
+        或者他们的 <a data-testid="site" href={props.site}>
+          网站
+        </a>。
+      </address>
+      <Map center={props.center} />
+    </div>
+  );
+}
+
+// 测试 - contact.test.js
+import React from 'react'
+import { render, unmountComponentAtNode } from 'react-dom'
+import { act } from 'react-dom/test-utils'
+
+import Map from './map.js'
+import Contact from './contact.js'
+
+// mock map 组件，它对于 Contact 的测试并不是很重要
+jest.mock('./map.js', () => {
+    return function dummyMap(props) {
+        return (
+            <div data-testid="map">
+                {props.map.lat}:{props.map.long}
+            </div>
+        )
+    }
+})
+
+// 渲染容器
+let container = null
+
+beforeEach(() => {
+    container = document.createElement('div')
+    document.body.appendChild(container)
+})
+
+afterEach(() => {
+    unmountComponentAtNode(container)
+    container.remove()
+    container = null
+})
+
+it("信息渲染正确", () => {
+    // 执行渲染操作
+    act(() => {
+        <Contact 
+            name="lzx"
+            email="email@address.com"
+            site="http://www.baidu.com"
+            center={{lat: 0, long: 0}}
+        />,
+        container
+    })
+    // 断言
+    expect(
+        document.querySelector('[data-testid="email"]').getAttribute("href")
+    ).toEqual("email@address.com")
+
+    expect(
+        document.querySelector('[data-testid="site"]').getAttribute("href")
+    ).toEqual("http://www.baidu.com")
+
+    expect(
+        document.querySelector('[data-testid="map"]').textContent
+    ).toEqual("0:0")
+})
+```
+
+### Events
+
+在 DOM 元素上触发真正的 DOM 事件，然后对结果进行断言
+
+```js
+// 组件 - toggle.js
+import React, { useState } from "react";
+
+export default function Toggle(props) {
+  const [state, setState] = useState(false);
+  return (
+    <button
+      onClick={() => {
+        setState(previousState => !previousState);
+        // 调用的时候 state 的值还没变
+        // 第一次点击的时候 state === false
+        props.onChange(!state);
+      }}
+      data-testid="toggle"
+    >
+      {state ? "Turn off" : "Turn on"}
+    </button>
+  );
+}
+
+// 测试 - toggle.test.js
+
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+
+import Toggle from "./toggle";
+
+let container = null;
+beforeEach(() => {
+  // 创建一个 DOM 元素作为渲染目标
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // 退出时进行清理
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it("点击更新值", () => {
+    // 模拟函数
+    const onChange = jest.fn()
+    // 渲染组件
+    act(() => {
+        <Toggle onChange={onChange} />,
+        container
+    })
+    // 获取按钮元素
+    const button = document.querySelector("[data-testid=toggle]")
+    expect(button.innerHTML).toBe("Turn on")
+    // 触发点击事件
+    act(() => {
+        button.dispatchEvent(new MouseEvent('click', { bubbles: true /* 允许冒泡 */ }))
+    })
+    //断言
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(button.innerHTML).toBe("Turn off")
+})
+```
+
+因为 React 会自动将事件委托给 root，所以我们得允许每个事件冒泡到 root 节点，每个事件得指定 `{ bubbles: true /* 允许冒泡 */ }`
+
+### 计时器
+
+使用 setTimeout 
+
+```js
+// 组件 - card.js
+// 超过 5 秒参数为 null
+import React, { useEffect } from "react";
+
+export default function Card(props) {
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      props.onSelect(null);
+    }, 5000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  }, [props.onSelect]);
+
+  return [1, 2, 3, 4].map(choice => (
+    <button
+      key={choice}
+      data-testid={choice}
+      onClick={() => props.onSelect(choice)}
+    >
+      {choice}
+    </button>
+  ));
+}
+
+// 测试 - card.test.js
+
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+import Card from "./card";
+
+let container = null;
+beforeEach(() => {
+  // 创建一个 DOM 元素作为渲染目标
+  container = document.createElement("div");
+  document.body.appendChild(container);
+  // 使用模拟计时器
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  // 退出时进行清理
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+  // 恢复到真实的计时器
+  jest.useRealTimers();
+});
+
+it("超时后应选择 null", () => {
+  // 模拟函数 
+  const onSelect = jest.fn();
+  // 渲染组件
+  act(() => {
+    render(<Card onSelect={onSelect} />, container);
+  });
+
+  // 将时间往前推 100 ms
+  act(() => {
+    jest.advanceTimersByTime(100);
+  });
+  // onSelect 不会被调用
+  expect(onSelect).not.toHaveBeenCalled();
+
+  // 将时间往前推 5000 ms
+  act(() => {
+    jest.advanceTimersByTime(5000);
+  });
+  // onSelect 被调用，参数为 null
+  expect(onSelect).toHaveBeenCalledWith(null);
+});
+
+it("移除时应进行清理", () => {
+  // 模拟函数
+  const onSelect = jest.fn();
+  // 渲染组件
+  act(() => {
+    render(<Card onSelect={onSelect} />, container);
+  });
+  // 将时间往前推 100 ms
+  act(() => {
+    jest.advanceTimersByTime(100);
+  });
+  // onSelect 不会被调用
+  expect(onSelect).not.toHaveBeenCalled();
+
+  // 卸载应用程序 - 定时器应被清除
+  act(() => {
+    render(null, container);
+  });
+  // 将时间往前推 5000 ms
+  act(() => {
+    jest.advanceTimersByTime(5000);
+  });
+  // 模拟函数不会被调用
+  expect(onSelect).not.toHaveBeenCalled();
+});
+
+it("应接受选择", () => {
+  // 模拟函数
+  const onSelect = jest.fn();
+  // 渲染组件
+  act(() => {
+    render(<Card onSelect={onSelect} />, container);
+  });
+  // 派发点击事件
+  act(() => {
+    container
+      .querySelector("[data-testid='2']")
+      .dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+  // 函数被调用，参数为指定的参数
+  expect(onSelect).toHaveBeenCalledWith(2);
+});
+```
+
+### 快照测试
+
+使用 toMatchSnapshot / toMatchInlineSnapshot 保存数据的快照。有了这些，我们可以保存渲染的组件输出，并确保对它的更新作为对快照的更新显式提交。
+
+```js
+// 组件 - hello.js
+import React from "react";
+
+export default function Hello(props) {
+    return <div>Hello {props.name ? props.name : '陌生人'}</div>
+}
+// 测试 - hello.test.js
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+// 对渲染的 HTML 进行格式化，然后将其保存为内联快照
+import pretty from "pretty";
+import Hello from "./hello";
+
+let container = null;
+beforeEach(() => {
+  // 创建一个 DOM 元素作为渲染目标
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // 退出时进行清理
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it("应渲染问候语", () => {
+  act(() => {
+    render(<Hello />, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... 由 jest 自动填充 ... */
+
+  act(() => {
+    render(<Hello name="Jenny" />, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... 由 jest 自动填充 ... */
+
+  act(() => {
+    render(<Hello name="Margaret" />, container);
+  });
+
+  expect(
+    pretty(container.innerHTML)
+  ).toMatchInlineSnapshot(); /* ... 由 jest 自动填充 ... */
+});
+```
+
+### 多渲染器
+
+使用多个渲染器在组件上运行测试
+
+```js
+import { act as domAct } from "react-dom/test-utils";
+import { act as testAct, create } from "react-test-renderer";
+// ...
+let root;
+domAct(() => {
+  testAct(() => {
+    root = create(<App />);
+  });
+});
+expect(root).toMatchSnapshot();
 ```
