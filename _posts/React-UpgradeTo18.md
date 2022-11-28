@@ -53,7 +53,7 @@ React将多个状态更新分组到一个重新渲染中以获得更好的性能
 
 > 需要关闭严格模式测试
 
-使用 flushSync 可以将批量更新的 State 分开更新
+使用 flushSync 可以将批量更新的 State 分开更新，并且会强制 DOM 更新同步应用，会损耗性能。
 
 ```js
 import { useState, useEffect } from "react";

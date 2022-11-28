@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-11-19 19:39:55
  */
 import Link from "next/link";
-import { BreadcrumbItem } from "../interfaces/breadcrumb";
+import BreadcrumbItem from "../interfaces/breadcrumb";
 
 type Props = {
   breadcrumbList: BreadcrumbItem[];

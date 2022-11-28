@@ -184,6 +184,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
+     // 安全转移代币
     function _safeTransfer(
         address from,
         address to,
@@ -210,6 +211,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * Tokens start existing when they are minted (`_mint`),
      * and stop existing when they are burned (`_burn`).
      */
+    // 是否存在 tokenId
     function _exists(uint256 tokenId) internal view virtual returns (bool) {
         return _ownerOf(tokenId) != address(0);
     }

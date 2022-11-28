@@ -20,21 +20,24 @@ type: 'React'
 常见方法是使用一对 beforeEach 和 afterEach 块，以便它们一直运行，并隔离测试本身造成的影响。
 
 ```js
-import { unmountComponentAtNode } from "react-dom"
+import ReactDOM from "react-dom/client"
 
+let root = null
 let container = null
 
 beforeEach(() => {
     // 创建元素，作为渲染容器
     container = document.createElement('div')
     document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
 })
 
 afterEach(() => {
     // 移除元素，卸载组件
-    unmountComponentAtNode(container)
+    root.unmount()
     document.body.removeChild(container)
     container = null
+    root = null
 })
 ```
 
@@ -61,36 +64,39 @@ export default function Hello(props) {
     return <div>Hello {props.name ? props.name : '陌生人'}</div>
 }
 // 测试 - hello.tst.js
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 import Hello from "./hello.js"
 
+let root = null
 let container = null
 
 beforeEach(() => {
     // 创建元素，作为渲染容器
     container = document.createElement('div')
     document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
 })
 
 afterEach(() => {
     // 移除元素，卸载组件
-    unmountComponentAtNode(container)
+    root.unmount()
     document.body.removeChild(container)
     container = null
+    root = null
 })
 
 it("是否根据 props 渲染", () => {
     act(() => {
         // 渲染组件
-        render(<Hello />, container)
+        root.render(<Hello />)
     })
     // 断言
     expect(container.textContent).toBe('Hello 陌生人')
 
     act(() => {
         // 渲染组件
-        render(<Hello name="李正星" />, container)
+        root.render(<Hello name="李正星" />, container)
     })
     // 断言
     expect(container.textContent).toBe('Hello 李正星')
@@ -131,24 +137,29 @@ export default function User(props) {
   );
 }
 // 测试 - user.test.js
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 import User from "./user";
 
+let root = null
 let container = null
 
 beforeEach(() => {
-    document.createElement('div')
+    // 创建元素，作为渲染容器
+    container = document.createElement('div')
     document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
 })
 
 afterEach(() => {
-    unmountComponentAtNode(container)
-    container.remove()
+    // 移除元素，卸载组件
+    root.unmount()
+    document.body.removeChild(container)
     container = null
+    root = null
 })
 
-it("渲染用户数据", () => {
+it("渲染用户数据", async () => {
     const fakeUser = {
         name: "李正星",
         age: "24",
@@ -163,7 +174,7 @@ it("渲染用户数据", () => {
 
     // 异步渲染
     await act(async () => {
-        render(<User id="2" />, container)
+        root.render(<User id="2" />)
     })
 
     // 断言
@@ -216,7 +227,7 @@ export default function Contact(props) {
 
 // 测试 - contact.test.js
 import React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { act } from 'react-dom/test-utils'
 
 import Map from './map.js'
@@ -233,30 +244,35 @@ jest.mock('./map.js', () => {
     }
 })
 
-// 渲染容器
+let root = null
 let container = null
 
 beforeEach(() => {
+    // 创建元素，作为渲染容器
     container = document.createElement('div')
     document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
 })
 
 afterEach(() => {
-    unmountComponentAtNode(container)
-    container.remove()
+    // 移除元素，卸载组件
+    root.unmount()
+    document.body.removeChild(container)
     container = null
+    root = null
 })
 
 it("信息渲染正确", () => {
     // 执行渲染操作
     act(() => {
-        <Contact 
-            name="lzx"
-            email="email@address.com"
-            site="http://www.baidu.com"
-            center={{lat: 0, long: 0}}
-        />,
-        container
+        root.render(
+            <Contact 
+                name="lzx"
+                email="email@address.com"
+                site="http://www.baidu.com"
+                center={{lat: 0, long: 0}}
+            />
+        )
     })
     // 断言
     expect(
@@ -301,32 +317,35 @@ export default function Toggle(props) {
 // 测试 - toggle.test.js
 
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 
 import Toggle from "./toggle";
 
-let container = null;
+let root = null
+let container = null
+
 beforeEach(() => {
-  // 创建一个 DOM 元素作为渲染目标
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+    // 创建元素，作为渲染容器
+    container = document.createElement('div')
+    document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
+})
 
 afterEach(() => {
-  // 退出时进行清理
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+    // 移除元素，卸载组件
+    root.unmount()
+    document.body.removeChild(container)
+    container = null
+    root = null
+})
 
 it("点击更新值", () => {
     // 模拟函数
     const onChange = jest.fn()
     // 渲染组件
     act(() => {
-        <Toggle onChange={onChange} />,
-        container
+        root.render(<Toggle onChange={onChange} />)
     })
     // 获取按钮元素
     const button = document.querySelector("[data-testid=toggle]")
@@ -376,34 +395,38 @@ export default function Card(props) {
 // 测试 - card.test.js
 
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 import Card from "./card";
 
-let container = null;
+let root = null
+let container = null
+
 beforeEach(() => {
-  // 创建一个 DOM 元素作为渲染目标
-  container = document.createElement("div");
-  document.body.appendChild(container);
-  // 使用模拟计时器
-  jest.useFakeTimers();
-});
+    // 创建元素，作为渲染容器
+    container = document.createElement('div')
+    document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
+    // 使用模拟计时器
+    jest.useFakeTimers();
+})
 
 afterEach(() => {
-  // 退出时进行清理
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-  // 恢复到真实的计时器
-  jest.useRealTimers();
-});
+    // 移除元素，卸载组件
+    root.unmount()
+    document.body.removeChild(container)
+    container = null
+    root = null
+    // 恢复到真实的计时器
+    jest.useRealTimers();
+})
 
 it("超时后应选择 null", () => {
   // 模拟函数 
   const onSelect = jest.fn();
   // 渲染组件
   act(() => {
-    render(<Card onSelect={onSelect} />, container);
+    root.render(<Card onSelect={onSelect} />);
   });
 
   // 将时间往前推 100 ms
@@ -426,7 +449,7 @@ it("移除时应进行清理", () => {
   const onSelect = jest.fn();
   // 渲染组件
   act(() => {
-    render(<Card onSelect={onSelect} />, container);
+    root.render(<Card onSelect={onSelect} />);
   });
   // 将时间往前推 100 ms
   act(() => {
@@ -437,7 +460,7 @@ it("移除时应进行清理", () => {
 
   // 卸载应用程序 - 定时器应被清除
   act(() => {
-    render(null, container);
+    root.render(null);
   });
   // 将时间往前推 5000 ms
   act(() => {
@@ -452,7 +475,7 @@ it("应接受选择", () => {
   const onSelect = jest.fn();
   // 渲染组件
   act(() => {
-    render(<Card onSelect={onSelect} />, container);
+    root.render(<Card onSelect={onSelect} />);
   });
   // 派发点击事件
   act(() => {
@@ -478,29 +501,33 @@ export default function Hello(props) {
 }
 // 测试 - hello.test.js
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
 // 对渲染的 HTML 进行格式化，然后将其保存为内联快照
 import pretty from "pretty";
 import Hello from "./hello";
 
-let container = null;
+let root = null
+let container = null
+
 beforeEach(() => {
-  // 创建一个 DOM 元素作为渲染目标
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+    // 创建元素，作为渲染容器
+    container = document.createElement('div')
+    document.body.appendChild(container)
+    root = ReactDOM.createRoot(container)
+})
 
 afterEach(() => {
-  // 退出时进行清理
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+    // 移除元素，卸载组件
+    root.unmount()
+    document.body.removeChild(container)
+    container = null
+    root = null
+})
 
 it("应渲染问候语", () => {
   act(() => {
-    render(<Hello />, container);
+    root.render(<Hello />);
   });
 
   expect(
@@ -508,7 +535,7 @@ it("应渲染问候语", () => {
   ).toMatchInlineSnapshot(); /* ... 由 jest 自动填充 ... */
 
   act(() => {
-    render(<Hello name="Jenny" />, container);
+    root.render(<Hello name="Jenny" />);
   });
 
   expect(
@@ -516,7 +543,7 @@ it("应渲染问候语", () => {
   ).toMatchInlineSnapshot(); /* ... 由 jest 自动填充 ... */
 
   act(() => {
-    render(<Hello name="Margaret" />, container);
+    root.render(<Hello name="Margaret" />);
   });
 
   expect(

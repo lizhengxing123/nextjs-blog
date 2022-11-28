@@ -12,7 +12,7 @@ import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 import type PostType from "../../interfaces/post";
-import { BreadcrumbItem } from "../../interfaces/breadcrumb";
+import BreadcrumbItem from "../../interfaces/breadcrumb";
 
 type Props = {
   post: PostType;

@@ -15,7 +15,7 @@ import { getAllPosts, getPostTypes } from "../lib/api";
 import { BLOG_TITLE, CMS_NAME } from "../lib/constants";
 import Post from "../interfaces/post";
 import PostCategory from "../interfaces/postCategory";
-import { BreadcrumbItem } from "../interfaces/breadcrumb";
+import BreadcrumbItem from "../interfaces/breadcrumb";
 
 type Props = {
   allPosts: Post[];
