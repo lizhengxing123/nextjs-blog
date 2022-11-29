@@ -18,9 +18,9 @@ type: 'Javascript'
 - `string`：字符串
 - 数组：使用 `Type[]` 或者 `Array<Type>`
 - 元组：已知元素数量和类型的数组
-  - 例如 `let x:[string, number]`，访问越界的元素会报错，在这个类型中就不能访问 `x[3]`
+    > 例如 `let x:[string, number]`，访问越界的元素会报错，在这个类型中就不能访问 `x[3]`
 - 枚举：`enum Color {Red, Green, Orange}`
-  - 可以使用`Color.Green`和`Color[0]`
+    > 可以使用`Color.Green`和`Color[0]`
 - `unknown`：不知道类型
 - `any`：任何类型
 - `void`：没有任何类型，例如函数没有返回值就是`void`
@@ -53,8 +53,8 @@ function isFish(pet: Bird | Fish): pet is Fish {
 
 ### 索引类型
 
-- `keyof T` - 索引类型查询操作符
-- `T[K]` - 索引访问操作符
+- `keyof T`：索引类型查询操作符
+- `T[K]`：索引访问操作符
 
 ```ts
 function pluck<T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] {
@@ -139,7 +139,7 @@ type PartialWithNewMember<T> = {
 };
 ```
 
-Picked 和 Record
+`Picked` 和 `Record`
 
 ```ts
 type Pick<T, K extends keyof T> = {
@@ -158,11 +158,11 @@ type RecordString = Record<'prop1' | 'prop2', string>
 
 ### 有条件类型
 
-- `Exclude<T, U>` -- 从 T 中剔除可以赋值给 U 的类型, 与 Diff 一样
-- `Extract<T, U>` -- 提取 T 中可以赋值给 U 的类型，与 Filter 一样
-- `NonNullable<T>` -- 从 T 中剔除 null 和 undefined 。
-- `ReturnType<T>` -- 获取函数返回值类型。
-- `InstanceType<T>` -- 获取构造函数类型的实例类型。
+- `Exclude<T, U>`：从 T 中剔除可以赋值给 U 的类型, 与 Diff 一样
+- `Extract<T, U>`：提取 T 中可以赋值给 U 的类型，与 Filter 一样
+- `NonNullable<T>`：从 T 中剔除 null 和 undefined 。
+- `ReturnType<T>`：获取函数返回值类型。
+- `InstanceType<T>`：获取构造函数类型的实例类型。
 
 ```ts
 // 筛选出 T 中存在， U 中不存在的类型
@@ -216,21 +216,21 @@ type T24 = InstanceType<Function>;  // Error
 
 ### 工具类型总结
 
-- `Partial<Type>` - 将 Type 中所有属性设置为可选的
-- `Required<Type>` - 将 Type 中所有属性设置为 required 
-- `Readonly<Type>` - 将 Type 中所有属性设置为只读的
-- `Record<Keys, Type>` - 将所有的 Keys 设置为Type
-- `Pick<Type, Keys>` - 从 Type 中筛选出 Keys
-- `Omit<Type, Keys>` - 从 Type 中剔除 Keys
-- `Exclude<Type, ExcludedUnion>` - 从 Type 中剔除所有 ExcludedUnion 中包含的属性
-- `Extract<Type, Union>` - 从 Type 中提取所有可以赋值给 Union 中的属性
-- `NonNullable<Type>` - 从 Type 中剔除 null 和 undefined
-- `Parameters<Type>` - 由函数类型 Type 的参数类型构造出来的一个元组
-- `ConstructorParameters<Type>` - 由构造函数类型来构建出一个元组类型或数组类型
-- `ReturnType<Type>` - 由函数类型 Type 的返回值类型构建一个新类型
-- `InstanceType<Type>` - 由构造函数类型 Type 的实例类型来构建一个新类型
-- `ThisParameterType<Type>` - 从函数类型中提取 this 参数的类型。 若函数类型不包含 this 参数，则返回 unknown 类型
-- `OmitThisParameter<Type>` - 从 Type 类型中剔除 this 参数。 若未声明 this 参数，则结果类型为 Type 。 否则，由 Type 类型来构建一个不带 this 参数的类型。 泛型会被忽略，并且只有最后的重载签名会被采用
+- `Partial<Type>`：将 Type 中所有属性设置为可选的
+- `Required<Type>`：将 Type 中所有属性设置为 required 
+- `Readonly<Type>`：将 Type 中所有属性设置为只读的
+- `Record<Keys, Type>`：将所有的 Keys 设置为Type
+- `Pick<Type, Keys>`：从 Type 中筛选出 Keys
+- `Omit<Type, Keys>`：从 Type 中剔除 Keys
+- `Exclude<Type, ExcludedUnion>`：从 Type 中剔除所有 ExcludedUnion 中包含的属性
+- `Extract<Type, Union>`：从 Type 中提取所有可以赋值给 Union 中的属性
+- `NonNullable<Type>`：从 Type 中剔除 null 和 undefined
+- `Parameters<Type>`：由函数类型 Type 的参数类型构造出来的一个元组
+- `ConstructorParameters<Type>`：由构造函数类型来构建出一个元组类型或数组类型
+- `ReturnType<Type>`：由函数类型 Type 的返回值类型构建一个新类型
+- `InstanceType<Type>`：由构造函数类型 Type 的实例类型来构建一个新类型
+- `ThisParameterType<Type>`：从函数类型中提取 this 参数的类型。 若函数类型不包含 this 参数，则返回 unknown 类型
+- `OmitThisParameter<Type>`：从 Type 类型中剔除 this 参数。 若未声明 this 参数，则结果类型为 Type 。 否则，由 Type 类型来构建一个不带 this 参数的类型。 泛型会被忽略，并且只有最后的重载签名会被采用
 
 
 ```ts

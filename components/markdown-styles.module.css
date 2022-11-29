@@ -9,6 +9,7 @@
   @apply my-6;
 }
 
+/* h2,h3 */
 .markdown h2,
 .markdown h3 {
   @apply mt-10 mb-4 leading-normal text-gray-50;
@@ -21,36 +22,48 @@
   @apply text-2xl;
 }
 
+/* a */
 .markdown a {
-  @apply text-gray-50 font-bold underline px-1 text-lg;
+  @apply font-bold underline px-1 text-lg text-yellow-400;
 }
 
+/* ul -> li */
 .markdown ul li {
   @apply relative ml-8;
 }
 
 .markdown ul li::before {
   content: "";
-  @apply absolute -left-8 top-2.5 w-2 h-2 rounded-full block mx-3 bg-gray-400;
+  @apply absolute -left-8 top-2.5 w-2 h-2 rounded-full block mx-3 bg-gray-300;
 }
 
+/* ol */
+.markdown ol {
+  @apply list-decimal ml-2 px-2;
+}
+
+.markdown ol li::marker {
+  @apply text-gray-300;
+}
+
+/* code */
 .markdown code:not(.markdown pre div code) {
-  @apply text-gray-50 font-bold text-lg;
-}
-.markdown code::before {
-  content: "`";
-}
-.markdown code::after {
-  content: "`";
+  @apply text-yellow-400 text-lg px-1;
 }
 
+/* pre */
 .markdown pre div {
   @apply rounded-2xl;
 }
 
-.markdown pre div code::before {
-  content: "";
+/* quote */
+.markdown blockquote {
+  @apply relative p-4 bg-yellow-900/10 rounded-md leading-none;
 }
-.markdown pre div code::after {
+.markdown blockquote p {
+  @apply text-gray-300 m-0;
+}
+.markdown blockquote::before {
   content: "";
+  @apply absolute top-0 left-0 h-full w-1.5 bg-yellow-500/70 rounded-l-md;
 }

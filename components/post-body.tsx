@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "./markdown-styles.module.css";
 
 export default function PostBody({ content }) {
@@ -15,7 +15,7 @@ export default function PostBody({ content }) {
             <SyntaxHighlighter
               children={String(children).replace(/\n$/, "")}
               language={match[1]}
-              style={materialDark}
+              style={coldarkDark}
               PreTag="div"
               {...props}
             />
