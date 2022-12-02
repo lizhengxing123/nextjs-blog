@@ -1,5 +1,5 @@
 ---
-title: 'Module 模块'
+title: 'CJS 和 ESM'
 excerpt: '学习 Module 模块'
 coverImage: '/assets/blog/node/logo.svg'
 date: '2022-11-29 21:32:19'

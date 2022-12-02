@@ -37,7 +37,7 @@ const List = ({ allPosts, postCategories }: Props) => {
 
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   useEffect(() => {
-    if (allPosts.length) {
+    if (allPosts.length && activeCategory) {
       const posts = allPosts.filter((post) => post.type === activeCategory);
       setShowPosts(posts);
     }
