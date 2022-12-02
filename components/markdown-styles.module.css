@@ -9,11 +9,17 @@
   @apply my-6;
 }
 
-/* h2,h3 */
+/* 标题 */
+.markdown h1,
 .markdown h2,
-.markdown h3 {
-  @apply mt-10 mb-4 leading-normal text-gray-50;
+.markdown h3,
+.markdown h4 {
+  @apply mt-10 mb-4 leading-normal text-gray-50 font-bold;
 }
+.markdown h1 {
+  @apply text-4xl;
+}
+
 .markdown h2 {
   @apply text-3xl;
 }

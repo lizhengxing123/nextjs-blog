@@ -5,7 +5,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "./markdown-styles.module.css";
 import "markdown-navbar/dist/navbar.css";
-import "./markdown-navigation.module.css";
 
 // 代码片段
 const code = ({ node, inline, className, children, ...props }) => {
@@ -28,14 +27,12 @@ const code = ({ node, inline, className, children, ...props }) => {
 export default function PostBody({ content }) {
   return (
     <>
-      <div className="fixed left-0 top-0 w-40 h-full">
-        <MarkdownNavbar
-          className="authorList"
-          source={content}
-          declarative={true}
-          ordered={false}
-        />
-      </div>
+      <MarkdownNavbar
+        className="authorList"
+        source={content}
+        declarative={true}
+        ordered={false}
+      />
       <ReactMarkdown
         className={`${styles.markdown} text-lg max-w-prose mt-6 prose prose-dark prose-lg text-gray-300 mx-auto`}
         children={content}

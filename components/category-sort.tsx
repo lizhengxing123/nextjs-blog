@@ -2,10 +2,8 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 10:45:08
- * @LastEditTime: 2022-11-17 19:00:29
+ * @LastEditTime: 2022-12-02 15:35:48
  */
-import Link from "next/link";
-import Image from "next/image";
 import PostCategory from "../interfaces/postCategory";
 import { MouseEvent, MouseEventHandler } from "react";
 
@@ -22,7 +20,8 @@ const CategorySort = ({
 }: Props) => {
   // 改变分类
   const handleChangeCategory = (e: MouseEvent<HTMLDivElement>) => {
-    setActiveCategory(e.currentTarget.innerText);
+    sessionStorage.setItem("type", e.currentTarget.textContent);
+    setActiveCategory(e.currentTarget.textContent);
   };
 
   return (

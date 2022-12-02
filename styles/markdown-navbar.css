@@ -1,0 +1,12 @@
+/* 目录样式 */
+.authorList {
+  @apply fixed top-1/2 right-10 w-52 -translate-y-1/2 hidden;
+}
+
+.authorList .title-anchor {
+  @apply text-gray-50;
+}
+
+.authorList .title-anchor.active {
+  @apply text-black bg-yellow-300 hover:bg-yellow-500;
+}

@@ -1,9 +1,3 @@
-/*
- * @Descripttion:
- * @Author: lizhengxing
- * @Date: 2022-11-17 15:39:22
- * @LastEditTime: 2022-11-17 20:20:21
- */
 import { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import Head from "next/head";
@@ -12,7 +6,7 @@ import Breadcrumb from "../components/breadcrumb";
 import CategorySort from "../components/category-sort";
 import PostCard from "../components/post-card";
 import { getAllPosts, getPostTypes } from "../lib/api";
-import { BLOG_TITLE, CMS_NAME } from "../lib/constants";
+import { BLOG_TITLE } from "../lib/constants";
 import Post from "../interfaces/post";
 import PostCategory from "../interfaces/postCategory";
 import BreadcrumbItem from "../interfaces/breadcrumb";
@@ -34,7 +28,13 @@ const breadcrumbList: BreadcrumbItem[] = [
 ];
 
 const List = ({ allPosts, postCategories }: Props) => {
-  const [activeCategory, setActiveCategory] = useState("React");
+  const [activeCategory, setActiveCategory] = useState("");
+  useEffect(() => {
+    // 当运行到客户端获取
+    const type = sessionStorage.getItem("type") || "React";
+    setActiveCategory(type);
+  }, []);
+
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   useEffect(() => {
     if (allPosts.length) {

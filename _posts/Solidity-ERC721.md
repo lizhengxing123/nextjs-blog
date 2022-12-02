@@ -1,13 +1,13 @@
 ---
 title: 'Solidity ERC721'
 excerpt: 'Solidity ERC721'
-coverImage: '/assets/blog/solidity/Erc20.png'
+coverImage: '/assets/blog/solidity/Erc721.png'
 date: '2022-11-23 20:21:06'
 author:
   name: 李正星
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
-  url: '/assets/blog/solidity/Erc20.png'
+  url: '/assets/blog/solidity/Erc721.png'
 type: 'Solidity'
 ---
 

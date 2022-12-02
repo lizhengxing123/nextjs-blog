@@ -2,13 +2,22 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 10:45:08
- * @LastEditTime: 2022-11-17 19:12:34
+ * @LastEditTime: 2022-12-02 15:21:05
  */
-import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import PostCategory from "../interfaces/postCategory";
 
 const CategoryCard = ({ children, name }: PostCategory) => {
+  const router = useRouter();
+  // 跳转到列表页
+  const goListPage = (type) => {
+    router.push({
+      pathname: "/list",
+    });
+    // 存储类型
+    sessionStorage.setItem("type", type);
+  };
   return (
     <div className="flex flex-col bg-black rounded-2xl shadow-xl">
       <div className="flex-1 relative pt-16 px-6 pb-8 md:px-8">
@@ -28,7 +37,11 @@ const CategoryCard = ({ children, name }: PostCategory) => {
           {children && children.length
             ? children.map((child) => {
                 return (
-                  <span key={child} className="underline mr-4 text-lg">
+                  <span
+                    key={child}
+                    className="underline mr-4 text-lg cursor-pointer"
+                    onClick={() => goListPage(child)}
+                  >
                     {child}
                   </span>
                 );
