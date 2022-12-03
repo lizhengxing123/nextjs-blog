@@ -14,7 +14,7 @@ type: 'React'
 ## Context
 
 [官方文档](https://zh-hans.reactjs.org/docs/context.html)
-[优秀博客](http://www.ptbird.cn/react-createContex-useContext.html)
+[优质文章](http://www.ptbird.cn/react-createContex-useContext.html)
 
 - 使用 React.createContext 创建上下文，由于子组件消费的时候也需要这个 Context，所以我们可以新建一个文件管理所有的 Context
 

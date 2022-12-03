@@ -30,7 +30,7 @@
 
 /* a */
 .markdown a {
-  @apply font-bold underline px-1 text-lg text-yellow-400;
+  @apply block underline px-1 text-lg text-yellow-400;
 }
 
 /* ul -> li */
