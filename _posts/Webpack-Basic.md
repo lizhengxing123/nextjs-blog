@@ -17,7 +17,7 @@ type: 'Webpack'
 
 ## 入口 - entry
 
-入口(`entry`)指示 `webpack` 应该使用哪个模块来作为构建其内部依赖图的开始。
+入口(`entry`)指示 `webpack` 应该使用哪个模块来作为构建其内部依赖图的开始。**使用相对路径**
 
 ### 单个入口（简写）语法
 
@@ -150,6 +150,8 @@ module.exports = {
 
 ### 用法
 
+**`path`需要使用绝对路径**
+
 ```js
 module.exports = {
   entry: "./src/main.js",
@@ -163,6 +165,7 @@ module.exports = {
 - 多个入口，使用占位符来确保每个文件具有唯一的名称
 
 ```js
+const path = require('path')
 module.exports = {
   entry: {
     app: "./src/app.js",
@@ -170,7 +173,7 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: __dirname + "/dist"
+    path: path.resolve(__dirname, "dist")
   }
 }
 // 输出 /dist/app.js /dist/vendor.js
@@ -273,7 +276,7 @@ module.exports = {
     main: "./src/main.js"
   },
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
   module: {
@@ -293,7 +296,7 @@ module.exports = {
     new webpack.ProgressPlugin(),
     // 生成 HTML 文件，并在其中引入打包之后的js
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "/src/index.html")
+      template: "./src/index.html"
     })
   ]
 }
@@ -313,3 +316,11 @@ compiler.run(function (err, stats) {
   // ...
 });
 ```
+
+## 模式- mode
+
+- `development`：开发模式
+- `production`：生产模式（默认）
+- `none`：不使用任何默认优化选项
+
+> 如果要根据 `webpack.config.js` 中的 `mode` 变量更改打包行为，则必须将配置导出为函数，函数返回值为配置对象
