@@ -96,7 +96,7 @@ it("是否根据 props 渲染", () => {
 
     act(() => {
         // 渲染组件
-        root.render(<Hello name="李正星" />, container)
+        root.render(<Hello name="李正星" />)
     })
     // 断言
     expect(container.textContent).toBe('Hello 李正星')

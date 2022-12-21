@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 12:10:09
- * @LastEditTime: 2022-11-18 22:26:07
+ * @LastEditTime: 2022-12-20 17:43:57
  */
 module.exports = {
   future: {
@@ -18,7 +18,7 @@ module.exports = {
 
     return config;
   },
-  images: {
-    domains: ["upload.wikimedia.org"],
-  },
+  // images: {
+  //   domains: ["upload.wikimedia.org"],
+  // },
 };
