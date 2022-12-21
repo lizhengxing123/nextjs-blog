@@ -8,19 +8,26 @@ export function getPostSlugs(path: string = "") {
   return fs.readdirSync(join(postsDirectory, path));
 }
 export function getPostTypes(path = postsDirectory) {
-  const result = [];
-  const root = fs.readdirSync(path);
-  if (root.length) {
-    for (const slug of root) {
-      const stat = fs.statSync(join(postsDirectory, slug));
-      if (stat.isDirectory()) {
-        result.push({
-          name: slug,
-          children: fs.readdirSync(join(path, slug)),
-        });
-      }
-    }
-  }
+  const result = [
+    { name: "Backend", children: ["Express", "Node"] },
+    {
+      name: "Blockchain",
+      children: ["Chainlink", "Ethers", "Hardhat", "Solidity"],
+    },
+    { name: "Frontend", children: ["Javascript", "React", "Webpack"] },
+  ];
+  // const root = fs.readdirSync(path);
+  // if (root.length) {
+  //   for (const slug of root) {
+  //     const stat = fs.statSync(join(postsDirectory, slug));
+  //     if (stat.isDirectory()) {
+  //       result.push({
+  //         name: slug,
+  //         children: fs.readdirSync(join(path, slug)),
+  //       });
+  //     }
+  //   }
+  // }
   return result;
 }
 export function getPostBySlug(
