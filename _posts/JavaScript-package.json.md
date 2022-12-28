@@ -14,6 +14,7 @@ type: 'Javascript'
 ## package.json
 
 [参考文章](https://juejin.cn/post/7023539063424548872)
+[官方文档](https://docs.npmjs.com/cli/v9/configuring-npm/package-json)
 
 `package.json` 文件是用来描述项目及项目所依赖的模块信息
 

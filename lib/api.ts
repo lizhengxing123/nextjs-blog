@@ -9,10 +9,10 @@ export function getPostSlugs(path: string = "") {
 }
 export function getPostTypes(path = postsDirectory) {
   const result = [
-    { name: "Backend", children: ["Express", "Node"] },
+    { name: "Backend", children: ["Node", "Express", "Graphql"] },
     {
       name: "Blockchain",
-      children: ["Chainlink", "Ethers", "Hardhat", "Solidity"],
+      children: ["Solidity", "Ethers", "Hardhat", "Chainlink"],
     },
     { name: "Frontend", children: ["Javascript", "React", "Webpack"] },
   ];
