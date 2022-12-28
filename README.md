@@ -1,63 +1,74 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+<div align="center">
+  <a href="https://github.com/lizhengxing123/nextjs-blog">
+    <img src="https://github.com/othneildrew/Best-README-Template/blob/master/images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+<h3 align="center">李正星的学习笔记</h3>
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using Markdown files as the data source.
+  <p align="center">
+    一名前端打工人的学习笔记，目前正在学习区块链智能合约开发
+    <br />
+    <a href="https://nextjs-blog-59j0ej2si-lizhengxing123.vercel.app/">网址</a>
+  </p>
+</div>
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+## 网站预览
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+![image](https://user-images.githubusercontent.com/55375948/209800976-fc34c4d0-a3f3-4113-bfba-9130d5c260f9.png)
 
-## Demo
+### 技术栈
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
 
-## Deploy your own
+### 使用
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/blog-starter)
+1. 克隆项目
+   ```sh
+   git clone https://github.com/lizhengxing123/nextjs-blog.git
+   ```
+2. 下载依赖包
+   ```sh
+   npm install
+   ```
+1. 启动项目
+   ```sh
+   npm run dev
+   ```
+4. 打开 http://localhost:3000 查看
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
+## 联系方式
 
-### Related examples
+Twitter - [@lizhengxing14](https://twitter.com/lizhengxing14) - Email@1241276517@qq.com
 
-- [WordPress](/examples/cms-wordpress)
-- [DatoCMS](/examples/cms-datocms)
-- [Sanity](/examples/cms-sanity)
-- [TakeShape](/examples/cms-takeshape)
-- [Prismic](/examples/cms-prismic)
-- [Contentful](/examples/cms-contentful)
-- [Strapi](/examples/cms-strapi)
-- [Agility CMS](/examples/cms-agilitycms)
-- [Cosmic](/examples/cms-cosmic)
-- [ButterCMS](/examples/cms-buttercms)
-- [Storyblok](/examples/cms-storyblok)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent](/examples/cms-kontent)
-- [Umbraco Heartcore](/examples/cms-umbraco-heartcore)
-- [Builder.io](/examples/cms-builder-io)
-- [TinaCMS](/examples/cms-tina/)
-- [Enterspeed](/examples/cms-enterspeed)
+Project Link: [https://github.com/lizhengxing123/nextjs-blog](https://github.com/lizhengxing123/nextjs-blog)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example blog-starter blog-starter-app
-```
-
-```bash
-yarn create next-app --example blog-starter blog-starter-app
-```
-
-```bash
-pnpm create next-app --example blog-starter blog-starter-app
-```
-
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-# Notes
-
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+[contributors-shield]: https://img.shields.io/github/contributors/lizhengxing123/nextjs-blog.svg?style=for-the-badge
+[contributors-url]: https://github.com/lizhengxing123/nextjs-blog/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lizhengxing123/nextjs-blog.svg?style=for-the-badge
+[forks-url]: https://github.com/lizhengxing123/nextjs-blog/network/members
+[stars-shield]: https://img.shields.io/github/stars/lizhengxing123/nextjs-blog.svg?style=for-the-badge
+[stars-url]: https://github.com/lizhengxing123/nextjs-blog/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lizhengxing123/nextjs-blog.svg?style=for-the-badge
+[issues-url]: https://github.com/lizhengxing123/nextjs-blog/issues
+[license-shield]: https://img.shields.io/github/license/lizhengxing123/nextjs-blog.svg?style=for-the-badge
+[license-url]: https://github.com/lizhengxing123/nextjs-blog/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
