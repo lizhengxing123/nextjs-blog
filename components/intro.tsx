@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 07:44:30
- * @LastEditTime: 2022-11-17 19:20:52
+ * @LastEditTime: 2022-12-31 17:45:18
  */
 
 import Avatar from "./avatar";
@@ -10,6 +10,7 @@ import CategoryCard from "./category-card";
 import { AUTHOR } from "../lib/constants";
 import PostCategory from "../interfaces/postCategory";
 import Link from "next/link";
+import FamousRemark from "./famous-remark";
 
 type Props = {
   postCategories: PostCategory[];
@@ -62,6 +63,7 @@ const Intro = ({ postCategories }: Props) => {
           </div>
         </div>
       </div>
+      <FamousRemark />
     </>
   );
 };

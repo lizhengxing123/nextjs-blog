@@ -8,3 +8,4 @@ export const AUTHOR = {
   picture: "/assets/blog/authors/zx.jpeg",
   intro: "前端开发工程师，正在学习区块链开发。",
 };
+export const FAMOUS_REMARK_TEXT = "学而不思则罔，思而不学则殆！";
