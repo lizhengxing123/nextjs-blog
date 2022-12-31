@@ -56,7 +56,7 @@ JSON.parse(JSON.stringify(obj))
 
 问题：
 
-1. 函数、`Symbol`、`DOM` 无法进行拷贝
+1. 函数、`Symbol`、`DOM`、`undefined` 无法进行拷贝
 2. 循环引用会导致报错
 
 #### 手写 deepClone 函数
