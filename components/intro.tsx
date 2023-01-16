@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 07:44:30
- * @LastEditTime: 2022-12-31 17:45:18
+ * @LastEditTime: 2023-01-16 15:18:33
  */
 
 import Avatar from "./avatar";
@@ -63,7 +63,7 @@ const Intro = ({ postCategories }: Props) => {
           </div>
         </div>
       </div>
-      <FamousRemark />
+      {/* <FamousRemark /> */}
     </>
   );
 };
