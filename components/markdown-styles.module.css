@@ -69,10 +69,10 @@
 
 /* quote */
 .markdown blockquote {
-  @apply relative p-4 bg-yellow-900/10 rounded-md leading-none;
+  @apply relative p-4 bg-yellow-400/10 rounded-md leading-none;
 }
 .markdown blockquote p {
-  @apply text-gray-300 m-0;
+  @apply text-gray-300 m-0 leading-9;
 }
 .markdown blockquote::before {
   content: "";

@@ -9,12 +9,16 @@ export function getPostSlugs(path: string = "") {
 }
 export function getPostTypes(path = postsDirectory) {
   const result = [
-    { name: "Backend", children: ["Node", /*"Express",*/ "Graphql"] },
+    {
+      name: "Backend",
+      children: ["Node", /*"Express",*/ "Graphql", "Python"],
+    },
     {
       name: "Blockchain",
       children: ["Solidity", /*"Ethers", "Hardhat",*/ "Chainlink"],
     },
     { name: "Frontend", children: ["Javascript", "React", "Webpack"] },
+    { name: "Algorithm", children: ["DataStructure"] },
   ];
   // const root = fs.readdirSync(path);
   // if (root.length) {
