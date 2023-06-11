@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 10:45:08
- * @LastEditTime: 2022-12-02 15:21:05
+ * @LastEditTime: 2023-06-11 11:14:50
  */
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ const CategoryCard = ({ children, name }: PostCategory) => {
   };
   return (
     <div className="flex flex-col bg-black rounded-2xl shadow-xl">
-      <div className="flex-1 relative pt-16 px-6 pb-8 md:px-8">
+      <div className="flex-1 relative pt-16 px-6 pb-8 mb-20 md:px-8">
         <div className="absolute top-0 inline-block rounded-xl shadow-lg transform -translate-y-1/2">
           <Image
             src={`/assets/blog/category/${name}.jpeg`}

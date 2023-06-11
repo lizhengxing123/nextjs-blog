@@ -273,3 +273,162 @@ def get_max(a, b):
 
 print(get_max.__doc__)
 ```
+
+### 装饰器
+
+在不修改被装饰对象的源代码和调用方式的前提下，给被装饰对象增加新的功能。
+
+装饰器本质上就是一个闭包函数。
+
+#### 无参装饰器
+
+```python
+def outer(fn):
+
+  def wrapper(*args, **kwargs):
+    res = fn(*args, **kwargs)
+    return res
+
+  return wrapper
+```
+
+统计函数运行时间的装饰器
+
+```python
+import time
+from functools import wraps
+
+def outer(fn):
+
+  @wraps(fn)  # 完美伪装 fn 的 __name__ 、 __doc__ 等等
+  def wrapper(*args, **kwargs):
+    start = time.time()
+
+    res = fn(*args, **kwargs)
+
+    end = time.time()
+
+    print(end - start)
+
+    return res
+
+  return wrapper
+
+
+# 充电效果
+@outer
+def recharge(num):
+
+  for i in range(num, 101):
+    time.sleep(0.1)
+    print(f'\r当前电量：{"|" * i} {i}%', end="")
+
+  print(' 电量已充满')
+    return 100
+
+print(recharge(80))
+
+"""
+当前电量：|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 100% 电量已充满
+2.1535401344299316
+100
+"""
+```
+
+#### 有参装饰器
+
+在外面再套一层
+
+```python
+from functools import wraps
+
+def g_outer(name):
+
+  def outer(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+
+      print(name)
+
+      res = fn(*args, **kwargs)
+
+      return res
+
+    return wrapper
+
+  return outer
+
+
+
+@g_outer('666')
+def home():
+    print('回家！')
+
+
+home()
+
+"""
+666
+回家！
+"""
+```
+
+#### 叠加装饰器
+
+从上往下依次执行，从下往上依次退出
+
+```python
+def outer1(fn):
+    def wrapper(*args, **kwargs):
+        print('开始执行 outer1')
+        result = fn(*args, **kwargs)
+        print('结束执行 outer1')
+        return result
+
+    return wrapper
+
+
+def outer2(name):
+    def outer(fn):
+        def wrapper(*args, **kwargs):
+            print('开始执行 outer2')
+            print('outer2 的参数', name)
+            result = fn(*args, **kwargs)
+            print('结束执行 outer2')
+            return result
+
+        return wrapper
+
+    return outer
+
+
+def outer3(fn):
+    def wrapper(*args, **kwargs):
+        print('开始执行 outer3')
+        result = fn(*args, **kwargs)
+        print('结束执行 outer3')
+        return result
+
+    return wrapper
+
+
+@outer1  # home = outer1(home) => outer1.wrapper
+@outer2(12)  # home = outer2(12) => outer2.outer(home) => outer2.outer.wrapper
+@outer3  # home = outer3(home) => outer3.wrapper
+def home(a):
+    print('home', a)
+
+
+home(11)
+
+"""
+开始执行 outer1
+开始执行 outer2
+outer2 的参数 12
+开始执行 outer3
+home 11
+结束执行 outer3
+结束执行 outer2
+结束执行 outer1
+"""
+```
