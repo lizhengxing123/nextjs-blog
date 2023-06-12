@@ -432,3 +432,96 @@ home 11
 结束执行 outer1
 """
 ```
+
+### 匿名函数
+
+相较于具名函数的重复调用，匿名函数只是临时调用一次
+
+```python
+lambda x, y=10: x + y
+```
+
+#### 在 `min` 和 `max` 中使用
+
+```python
+person_dic = {
+    'l': 100,
+    'z': 200,
+    'x': 300
+}
+
+print(min(person_dic, key=lambda k: person_dic[k])) # l
+print(max(person_dic, key=lambda k: person_dic[k])) # x
+```
+
+#### 在 `sort` 和 `sorted` 使用
+
+```python
+l1 = [(1, 3), (2, 9), (3, 5), (3, 1), (9, 0), (8, 7)]
+
+l1.sort(key=lambda t: t[1], reverse=True)
+
+print(l1) # [(2, 9), (8, 7), (3, 5), (1, 3), (3, 1), (9, 0)]
+```
+
+```python
+l2 = [
+    {
+        'label': '111',
+        'value': 35
+    },
+    {
+        'label': '222',
+        'value': 32
+    },
+    {
+        'label': '333',
+        'value': 135
+    },
+    {
+        'label': '444',
+        'value': 89
+    }
+]
+
+res = sorted(l2, key=lambda d: d['value'])
+
+print(res)
+print(l2)
+
+"""
+[{'label': '222', 'value': 32}, {'label': '111', 'value': 35}, {'label': '444', 'value': 89}, {'label': '333', 'value': 135}]
+[{'label': '111', 'value': 35}, {'label': '222', 'value': 32}, {'label': '333', 'value': 135}, {'label': '444', 'value': 89}]
+"""
+```
+
+#### 在 `map` 中使用
+
+```python
+l3 = ['康师傅', '统一', '大今野']
+
+res = map(lambda i: i + '_老坛酸菜牛肉面', l3)
+
+# 生成器
+print(res) # <map object at 0x7fee78055b80>
+
+print(next(res)) # 康师傅_老坛酸菜牛肉面
+print(next(res)) # 统一_老坛酸菜牛肉面
+print(next(res)) # 大今野_老坛酸菜牛肉面
+# print(next(res)) # StopIteration
+```
+
+### 函数参数的类型提示
+
+> **`Tips`**
+>
+> 类型提示只是一种规范，并不是强制必须传这种类型
+
+```python
+def fn1(a: str, b: int = 30) -> int:
+    print(a)
+    return b + 10
+
+
+print(fn1('123', b=90))  # 100
+```
