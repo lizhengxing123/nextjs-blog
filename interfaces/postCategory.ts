@@ -1,6 +1,6 @@
 type postCategory = {
   name: string;
-  children: string[];
+  children: postCategory[];
 };
 
 export default postCategory;

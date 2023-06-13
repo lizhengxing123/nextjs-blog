@@ -1,3 +1,9 @@
+/*
+ * @Descripttion:
+ * @Author: lizhengxing
+ * @Date: 2022-11-17 15:39:22
+ * @LastEditTime: 2023-06-13 10:44:45
+ */
 import { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import Head from "next/head";
@@ -10,6 +16,7 @@ import { BLOG_TITLE } from "../lib/constants";
 import Post from "../interfaces/post";
 import PostCategory from "../interfaces/postCategory";
 import BreadcrumbItem from "../interfaces/breadcrumb";
+import ActiveCategory from "../interfaces/category";
 
 type Props = {
   allPosts: Post[];
@@ -28,17 +35,24 @@ const breadcrumbList: BreadcrumbItem[] = [
 ];
 
 const List = ({ allPosts, postCategories }: Props) => {
-  const [activeCategory, setActiveCategory] = useState("");
+  const [activeCategory, setActiveCategory] = useState<ActiveCategory>({
+    name: "Frontend",
+    sonName: "React",
+    grandsonName: "全部",
+  });
   useEffect(() => {
     // 当运行到客户端获取
-    const type = sessionStorage.getItem("type") || "React";
-    setActiveCategory(type);
+    let type = sessionStorage.getItem("type");
+    if (type) {
+      type = JSON.parse(type);
+      setActiveCategory(type as unknown as ActiveCategory);
+    }
   }, []);
 
   const [showPosts, setShowPosts] = useState<Post[]>([]);
   useEffect(() => {
     if (allPosts.length && activeCategory) {
-      const posts = allPosts.filter((post) => post.type === activeCategory);
+      const posts = allPosts.filter((post) => post.type === activeCategory.sonName);
       setShowPosts(posts);
     }
   }, [activeCategory]);

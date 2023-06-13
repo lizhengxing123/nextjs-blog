@@ -11,14 +11,63 @@ export function getPostTypes(path = postsDirectory) {
   const result = [
     {
       name: "Backend",
-      children: ["Node", /*"Express",*/ "Graphql", "Python"],
+      children: [
+        {
+          name: "Node",
+          children: [],
+        },
+        {
+          name: "Express",
+          children: [],
+        },
+        {
+          name: "Graphql",
+          children: [],
+        },
+        {
+          name: "Python",
+          children: [],
+        },
+      ],
     },
     {
       name: "Blockchain",
-      children: ["Solidity", /*"Ethers", "Hardhat",*/ "Chainlink"],
+      children: [
+        {
+          name: "Solidity",
+          children: [],
+        },
+        {
+          name: "Ethers",
+          children: [],
+        },
+        {
+          name: "Hardhat",
+          children: [],
+        },
+        {
+          name: "Chainlink",
+          children: [],
+        },
+      ],
     },
-    { name: "Frontend", children: ["Javascript", "React", "Webpack"] },
-    { name: "Algorithm", children: ["DataStructure"] },
+    {
+      name: "Frontend",
+      children: [
+        {
+          name: "Javascript",
+          children: [],
+        },
+        {
+          name: "React",
+          children: [],
+        },
+        {
+          name: "Webpack",
+          children: [],
+        },
+      ],
+    },
   ];
   // const root = fs.readdirSync(path);
   // if (root.length) {
