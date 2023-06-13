@@ -1,6 +1,6 @@
 ---
-title: 'os 模块'
-excerpt: 'os 模块'
+title: 'os和sys'
+excerpt: 'os和sys'
 coverImage: '/assets/blog/python/logo.png'
 date: '2023-06-12 17:30:01'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Python'
 ---
 
-## os 模块
+### os 模块
 
 ```python
 import os
@@ -207,4 +207,18 @@ print(os.path.getctime('/code/python/basic/01-变量.py'))
 ```python
 print(os.path.getsize('/code/python/basic/01-变量.py')) 
 # 1517
+```
+
+### sys 模块
+
+- 获取环境变量路径
+
+```python
+print(sys.path)
+```
+
+- 获取输入命令的参数
+
+```python
+print(sys.argv)
 ```

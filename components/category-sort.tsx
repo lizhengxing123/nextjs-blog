@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 10:45:08
- * @LastEditTime: 2023-06-13 10:51:41
+ * @LastEditTime: 2023-06-13 14:33:12
  */
 import PostCategory from "../interfaces/postCategory";
 import ActiveCategory from "../interfaces/category";
@@ -22,11 +22,17 @@ const CategorySort = ({
   const handleChangeCategory = (type, name) => {
     // 第二层点击
     if (type === 2) {
-      setActiveCategory({
+      const obj = {
         name: activeCategory.name,
         sonName: name,
         grandsonName: "全部",
-      });
+      };
+      setActiveCategory(obj);
+      // 存储类型
+      sessionStorage.setItem(
+        "type",
+        JSON.stringify(obj)
+      );
     }
   };
 
