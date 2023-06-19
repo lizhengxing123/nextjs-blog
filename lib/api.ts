@@ -28,6 +28,10 @@ export function getPostTypes(path = postsDirectory) {
           name: "Python",
           children: [],
         },
+        {
+          name: "Go",
+          children: [],
+        },
       ],
     },
     {
