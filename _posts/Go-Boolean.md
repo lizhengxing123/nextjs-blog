@@ -1,6 +1,6 @@
 ---
-title: '基础数据类型-布尔型'
-excerpt: '基础数据类型-布尔型'
+title: '布尔型'
+excerpt: '布尔型'
 coverImage: '/assets/blog/go/basicDataType.webp'
 date: '2023-07-03 17:37:21'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Go'
 ---
 
-## 基础数据类型-布尔型
+## 布尔型
 
 布尔类型的值只有两个： `true` 和 `false`
 

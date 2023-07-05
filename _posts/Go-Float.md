@@ -1,6 +1,6 @@
 ---
-title: '基础数据类型-浮点型'
-excerpt: '基础数据类型-浮点型'
+title: '浮点型'
+excerpt: '浮点型'
 coverImage: '/assets/blog/go/basicDataType.webp'
 date: '2023-06-29 15:00:42'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Go'
 ---
 
-## 基础数据类型-浮点型
+## 浮点型
 
 有两种精度的浮点数，它们的取值范围可以从很微小到很巨大
 

@@ -1,6 +1,6 @@
 ---
-title: '基础数据类型-复数'
-excerpt: '基础数据类型-复数'
+title: '复数'
+excerpt: '复数'
 coverImage: '/assets/blog/go/basicDataType.webp'
 date: '2023-07-03 17:11:31'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Go'
 ---
 
-## 基础数据类型-复数
+## 复数
 
 有两种精度的复数类型：`complex64` 和 `complex128`，分别对应 `float32` 和 `float64` 两种浮点数精度。
 

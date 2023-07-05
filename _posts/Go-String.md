@@ -1,6 +1,6 @@
 ---
-title: '基础数据类型-字符串'
-excerpt: '基础数据类型-字符串'
+title: '字符串'
+excerpt: '字符串'
 coverImage: '/assets/blog/go/basicDataType.webp'
 date: '2023-07-04 09:10:49'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Go'
 ---
 
-## 基础数据类型-字符串
+## 字符串
 
 字符串是一个不可改变的字节序列。字符串可以包含任意的数据。文本字符串通常被解释为采用 `UTF8` 编码的 `Unicode` 码点（`rune`）序列。
 

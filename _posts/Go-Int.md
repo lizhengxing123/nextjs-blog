@@ -1,6 +1,6 @@
 ---
-title: '基础数据类型-整型'
-excerpt: '基础数据类型-整型'
+title: '整型'
+excerpt: '整型'
 coverImage: '/assets/blog/go/basicDataType.webp'
 date: '2023-06-27 16:55:37'
 author:
@@ -11,7 +11,7 @@ ogImage:
 type: 'Go'
 ---
 
-## 基础数据类型-整型
+## 整型
 
 `Go` 语言的数值类型包括几种不同大小的整数、浮点数和复数。每种数值类型都决定了对应的大小范围和是否支持正负符号。
 
