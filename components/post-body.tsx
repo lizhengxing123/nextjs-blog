@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import MarkdownNavbar from "markdown-navbar";
+import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "./markdown-styles.module.css";
@@ -36,6 +37,7 @@ export default function PostBody({ content }) {
       <ReactMarkdown
         className={`${styles.markdown} text-lg max-w-prose mt-6 prose prose-dark prose-lg text-gray-300 mx-auto`}
         children={content}
+        remarkPlugins={[remarkGfm]}
         components={{
           code,
         }}

@@ -29,6 +29,10 @@ export function getPostTypes(path = postsDirectory) {
           children: [],
         },
         {
+          name: "Linux",
+          children: [],
+        },
+        {
           name: "Python",
           children: [],
         },
