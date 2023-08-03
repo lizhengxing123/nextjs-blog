@@ -80,6 +80,23 @@ export function getPostTypes(path = postsDirectory) {
         },
       ],
     },
+    {
+      name: "Algorithm",
+      children: [
+        {
+          name: "UsefulInformation",
+          children: [],
+        },
+        {
+          name: "DataStructure",
+          children: [],
+        },
+        {
+          name: "Algorithms",
+          children: [],
+        },
+      ],
+    },
   ];
   // const root = fs.readdirSync(path);
   // if (root.length) {
