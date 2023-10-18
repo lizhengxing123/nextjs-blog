@@ -126,7 +126,7 @@ select * from t2;
 
 >`float` 和 `double` 浮点数指定宽度可以传两个参数，
 > 第一个参数表示数字个数（最大为255，如果小数为30，那么前面的整数就有 255-30=225 个），
-> 第二个参数表示小数点后面的小树个数（最大为30）
+> 第二个参数表示小数点后面的小数个数（最大为30）
 
 ### 字符
 
@@ -142,7 +142,7 @@ select * from t2;
 
 对于 `varchar(10)` 来说，最多能存 10 个字符；如果超过10个字符，会直接报错；如果不足10个字符，直接存，不会以空格补充。
 
-最大字符数是 21844
+最大字节是 65535（一行的最大字节数）
 
 > `varchar` 最多能存储 65535 个字节。
 > 其中 `null` 要占去一个字节，每个字段头要占 1(小于 255 字节) 或 2(255 ～ 65535) 个字节
@@ -152,7 +152,9 @@ select * from t2;
 > 
 > 如果是 `utf8` 编码的话，一个字符占3个字节，总共能存储 65532/3=21844 个字符
 
-```shell
+```sql
+mysql> create table t3(first_name char(10), last_name varchar(10));
+
 mysql> insert into t3 values('  xx  ', '  xx  ');
 
 mysql> select char_length(first_name), char_length(last_name) from t3;
@@ -169,6 +171,134 @@ mysql> select char_length(first_name), char_length(last_name) from t3;
 - `char`：浪费空间，但存取速度快
 - `varchar`：节省空间，但存取速度慢（**推荐使用**）
 
+#### 注意点
+
+`varchar` 最多能存储 65535 个字节，这是行大小，如果该行还有其它字段，那么存储的字符数还要相应的减少
+
+```sql
+-- utf8
+mysql> create table t2(id int, name varchar(21844)) charset=utf8;
+ERROR 1118 (42000): Row size too large. The maximum row size for the used table type, not counting BLOBs, is 65535. This includes storage overhead, check the manual. You have to change some columns to TEXT or BLOBs
+-- 由于 int 占用四个字节，因此在 utf8 编码的情况下，要减去两个字符
+mysql> create table t2(id int, name varchar(21842)) charset=utf8;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+-- gbk
+mysql> create table t3(id int, name varchar(32766)) charset=gbk;
+ERROR 1118 (42000): Row size too large. The maximum row size for the used table type, not counting BLOBs, is 65535. This includes storage overhead, check the manual. You have to change some columns to TEXT or BLOBs
+-- 由于 int 占用四个字节，因此在 gbk 编码的情况下，要减去两个字符
+mysql> create table t3(id int, name varchar(32764)) charset=gbk;
+Query OK, 0 rows affected (0.01 sec)
+```
 ### 时间日期
+
+#### year
+
+年
+
+#### date
+
+年月日
+
+#### time
+
+时分秒
+
+#### datetime
+
+年月日时分秒，8个字节，能存1000～9999年
+
+#### timestamp
+
+时间戳，4个字节，能存1970～2038年
+
+```sql
+mysql> create table user(
+    ->   id int,
+    ->   name varchar(16),
+    ->   born year,
+    ->   birth date,
+    ->   active time,
+    ->   reg_time datetime
+    -> );
+
+-- now() 是 mysql 提供的函数，获取当前时间
+mysql> insert into user values(1, "lzx", now(), now(), now(), now());
+mysql> insert into user values(2, 'lll', '1999', '1999-02-05', '15:53:34', now());
+
+mysql> select * from user;
++------+------+------+------------+----------+---------------------+
+| id   | name | born | birth      | active   | reg_time            |
++------+------+------+------------+----------+---------------------+
+|    1 | lzx  | 2023 | 2023-10-07 | 15:49:05 | 2023-10-07 15:49:05 |
+|    2 | lll  | 1999 | 1999-02-05 | 15:53:34 | 2023-10-07 15:54:04 |
++------+------+------+------------+----------+---------------------+
+```
 ### 枚举
+
+`enum` 单选
+
+```sql
+mysql> create table t4(
+    ->   id int,
+    ->   name varchar(16),
+    ->   gender enum('male', 'female', 'other')
+    -> );
+
+mysql> insert into t4 values(1, 'lzx', 'male');
+
+mysql> select * from t4;
++------+------+--------+
+| id   | name | gender |
++------+------+--------+
+|    1 | lzx  | male   |
++------+------+--------+
+
+mysql> desc t4;
++--------+-------------------------------+------+-----+---------+-------+
+| Field  | Type                          | Null | Key | Default | Extra |
++--------+-------------------------------+------+-----+---------+-------+
+| id     | int                           | YES  |     | NULL    |       |
+| name   | varchar(16)                   | YES  |     | NULL    |       |
+| gender | enum('male','female','other') | YES  |     | NULL    |       |
++--------+-------------------------------+------+-----+---------+-------+
+
+-- 不能插入枚举值以外的东西
+mysql> insert into t4 values(2, 'lll', 'xx');
+ERROR 1265 (01000): Data truncated for column 'gender' at row 1
+```
+
 ### 集合
+
+`set` 多选
+
+```sql
+mysql> create table t5(
+    ->   id int,
+    ->   name varchar(16),
+    ->   hobby set('tea', 'code', 'game')
+    -> );
+
+mysql> desc t5;
++-------+--------------------------+------+-----+---------+-------+
+| Field | Type                     | Null | Key | Default | Extra |
++-------+--------------------------+------+-----+---------+-------+
+| id    | int                      | YES  |     | NULL    |       |
+| name  | varchar(16)              | YES  |     | NULL    |       |
+| hobby | set('tea','code','game') | YES  |     | NULL    |       |
++-------+--------------------------+------+-----+---------+-------+
+
+mysql> insert into t5 values(1, 'lzx', 'code'),(2, 'lll', 'game,tea');
+
+mysql> select * from t5;
++------+------+----------+
+| id   | name | hobby    |
++------+------+----------+
+|    1 | lzx  | code     |
+|    2 | lll  | tea,game |
++------+------+----------+
+
+-- 不在 set 里面的数据不能插入
+mysql> insert into t5 values(3, 'zzz', 'ball');
+ERROR 1265 (01000): Data truncated for column 'hobby' at row 1
+```

@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: lizhengxing
  * @Date: 2022-11-17 10:45:08
- * @LastEditTime: 2023-06-13 09:53:54
+ * @LastEditTime: 2023-08-07 16:22:59
  */
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ const CategoryCard = ({ children, name }: PostCategory) => {
         <h3 className="text-xl font-medium text-gray-100">
           {name} Development
         </h3>
-        <div className="mt-4 text-base text-gray-200">
+        <div className="mt-4 text-base text-gray-200 flex flex-wrap">
           {children && children.length
             ? children.map((child) => {
                 return (
