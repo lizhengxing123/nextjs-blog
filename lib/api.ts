@@ -37,6 +37,10 @@ export function getPostTypes(path = postsDirectory) {
           children: [],
         },
         {
+          name: "Django",
+          children: [],
+        },
+        {
           name: "Go",
           children: [],
         },
@@ -49,14 +53,14 @@ export function getPostTypes(path = postsDirectory) {
           name: "Solidity",
           children: [],
         },
-        {
-          name: "Ethers",
-          children: [],
-        },
-        {
-          name: "Hardhat",
-          children: [],
-        },
+        // {
+        //   name: "Ethers",
+        //   children: [],
+        // },
+        // {
+        //   name: "Hardhat",
+        //   children: [],
+        // },
         {
           name: "Chainlink",
           children: [],
