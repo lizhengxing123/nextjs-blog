@@ -16,6 +16,7 @@ const code = ({ node, inline, className, children, ...props }) => {
       language={match[1]}
       style={coldarkDark}
       PreTag="div"
+      showLineNumbers={true}
       {...props}
     />
   ) : (

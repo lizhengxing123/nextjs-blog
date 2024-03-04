@@ -24,7 +24,7 @@ print(time.time()) # 1686553202.0593321
 #### 格式化时间
 
 ```python
-print(time.strftime('%Y-%m-%d %H-%M-%M %A')) # 2023-06-12 15-05-05 Monday
+print(time.strftime('%Y-%m-%d %H-%M-%S %A')) # 2023-06-12 15-05-05 Monday
 
 # 使用 X 代替时分秒
 print(time.strftime('%Y-%m-%d %X %A')) # 2023-06-12 15:05:00 Monday

@@ -16,10 +16,10 @@ export function getPostTypes(path = postsDirectory) {
           name: "Node",
           children: [],
         },
-        {
-          name: "Express",
-          children: [],
-        },
+        // {
+        //   name: "Express",
+        //   children: [],
+        // },
         {
           name: "Graphql",
           children: [],
@@ -40,10 +40,10 @@ export function getPostTypes(path = postsDirectory) {
           name: "Django",
           children: [],
         },
-        {
-          name: "Go",
-          children: [],
-        },
+        // {
+        //   name: "Go",
+        //   children: [],
+        // },
       ],
     },
     {
@@ -84,23 +84,27 @@ export function getPostTypes(path = postsDirectory) {
         },
       ],
     },
-    {
-      name: "Algorithm",
-      children: [
-        {
-          name: "UsefulInformation",
-          children: [],
-        },
-        {
-          name: "DataStructure",
-          children: [],
-        },
-        {
-          name: "Algorithms",
-          children: [],
-        },
-      ],
-    },
+    // {
+    //   name: "Algorithm",
+    //   children: [
+    //     {
+    //       name: "UsefulInformation",
+    //       children: [],
+    //     },
+    //     {
+    //       name: "DataStructure",
+    //       children: [],
+    //     },
+    //     {
+    //       name: "Algorithms",
+    //       children: [],
+    //     },
+    //     {
+    //       name: "Questions",
+    //       children: [],
+    //     },
+    //   ],
+    // },
   ];
   // const root = fs.readdirSync(path);
   // if (root.length) {
