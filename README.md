@@ -6,7 +6,7 @@
 <h3 align="center">李正星的学习笔记</h3>
 
   <p align="center">
-    一名前端打工人的学习笔记，目前正在学习区块链智能合约开发
+    一名前端打工人的学习笔记，目标为全栈开发工程师，持续努力中...
     <br />
     <a href="https://nextjs-blog-59j0ej2si-lizhengxing123.vercel.app/">网址</a>
   </p>

@@ -6,6 +6,6 @@ export const BLOG_TITLE = "李正星的学习笔记";
 export const AUTHOR = {
   name: "李正星",
   picture: "/assets/blog/authors/zx.jpeg",
-  intro: "前端开发工程师，正在学习区块链开发。",
+  intro: "一名前端打工人的学习笔记，目标为全栈开发工程师，持续努力中...",
 };
 export const FAMOUS_REMARK_TEXT = "学而不思则罔，思而不学则殆！";
