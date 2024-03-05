@@ -8,7 +8,7 @@ author:
   picture: '/assets/blog/authors/zx.jpeg'
 ogImage:
   url: '/assets/blog/webpack/webpack.png'
-type: 'Webpack'
+type: 'Questions'
 ---
 
 ### 只出现奇数次的一个数字
