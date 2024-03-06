@@ -11,7 +11,7 @@ ogImage:
 type: 'Solidity'
 ---
 
-## ERC20 OpenZeppelin 实现
+## ERC721 OpenZeppelin 实现
 
 [官方地址](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol)
 
